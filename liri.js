@@ -37,19 +37,39 @@ function appStart(whichApi, whatInfo) {
 function concertThis() {
     var bandSearch = "https://rest.bandsintown.com/artists/" + whatInfo + "/events?app_id=codingbootcamp";
 
-    request(bandSearch, function (error, response, body) {
+    axios.get(bandSearch).then(
+        function (response) {
+            // seperate the retrieved data
+            console.log("-----------------------")
+            // venue response
+            console.log("Name of Venue: " + response.data[0].venue.name + "\n");
+            // location response
+            console.log("Venue Location: " + response.data[0].venue.city + "\n");
+            // date response
+            console.log("Date of event: " + moment(response.data[0].datetime).format("MM-DD-YYYY") + "\n")
 
-    })
-}
 
-function spotifyThis(song) {
+            // put text in log.txt
+            var logIt = "-----Spotify Log-----\nArtist Name: " + whatInfo + "\nName of Venue: " + response.data[0].venue.name + "\nVenue Location: " + response.data[0].venue.city + "\nDate of event: " + moment(response.data[0].datetime).format("MM-DD-YYYY") + "\n"
+
+            fs.appendFile("log.txt", logIt, function (err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        });
+
+};
+
+
+function spotifyThis() {
     var spotify = new Spotify(keys.spotify);
 
-    if (!song) {
-        song = "The Sign";
+    if (!whatInfo) {
+        whatInfo = "The Sign";
     };
 
-    spotify.search({ type: "track", query: song }, function (err, data) {
+    spotify.search({ type: "track", query: whatInfo, limit: 1 }, function (err, data) {
         if (err) {
             console.log("I have Broken " + err);
         }
