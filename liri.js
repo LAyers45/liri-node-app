@@ -133,4 +133,8 @@ function movieThis(whatInfo) {
         });
 
 }
+
+function liriGo() {
+
+}
 appStart(whichApi, whatInfo);
