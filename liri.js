@@ -25,7 +25,7 @@ function appStart(whichApi, whatInfo) {
             break;
 
         case "do-what-it-says":
-            liriGo(whatInfo);
+            liriGo();
             break;
 
         default: console.log("\nType one of these after 'node liri.js': \nconcert-this <artist/band name here>\nspotify-this-song <song title>\nmovie-this <movie title>\ndo-what-it-says")
@@ -42,15 +42,15 @@ function concertThis() {
             // seperate the retrieved data
             console.log("-----------------------")
             // venue response
-            console.log("Name of Venue: " + response.data[0].venue.name + "\n");
+            console.log("Name of Venue: " + response.data[0].venue.name);
             // location response
-            console.log("Venue Location: " + response.data[0].venue.city + "\n");
+            console.log("Venue Location: " + response.data[0].venue.city);
             // date response
-            console.log("Date of event: " + moment(response.data[0].datetime).format("MM-DD-YYYY") + "\n")
+            console.log("Date of event: " + moment(response.data[0].datetime).format("MM-DD-YYYY"))
 
 
             // put text in log.txt
-            var logIt = "-----Spotify Log-----\nArtist Name: " + whatInfo + "\nName of Venue: " + response.data[0].venue.name + "\nVenue Location: " + response.data[0].venue.city + "\nDate of event: " + moment(response.data[0].datetime).format("MM-DD-YYYY") + "\n"
+            var logIt = "\n-----Concerts Log-----\nArtist Name: " + whatInfo + "\nName of Venue: " + response.data[0].venue.name + "\nVenue Location: " + response.data[0].venue.city + "\nDate of event: " + moment(response.data[0].datetime).format("MM-DD-YYYY") + "\n"
 
             fs.appendFile("log.txt", logIt, function (err) {
                 if (err) {
@@ -76,16 +76,16 @@ function spotifyThis() {
         //search result follows line
         console.log("----------------------------");
         // artist response
-        console.log("Artist Name: " + data.tracks.items[0].album.artist[0].name + "\n")
+        console.log("Artist Name : " + data.tracks.items[0].album.artist[0].name)
         // song name response
-        console.log("Song Name: " + data.tracks.items[0].name + "\n")
+        console.log("Song Name : " + data.tracks.items[0].name)
         // preview link response
-        console.log("Song Preview URL: " + data.tracks.items[0].href + "\n")
+        console.log("Song Preview URL : " + data.tracks.items[0].href)
         // album response
-        console.log("Album: " + data.tracks.items[0].album.name + "\n")
+        console.log("Album : " + data.tracks.items[0].album.name)
 
         // put text in log.txt
-        var logIt = "-----Spotify Log-----\nArtist Name: " + data.tracks.items[0].album.artist[0].name + "\nSong Name: " + data.tracks.items[0].name + "\nSong Preview URL: " + data.tracks.items[0].href + "\nAlbum: " + data.tracks.items[0].album.name + "\n"
+        var logIt = "\n-----Spotify Log-----\nArtist Name: " + data.tracks.items[0].album.artist[0].name + "\nSong Name: " + data.tracks.items[0].name + "\nSong Preview URL: " + data.tracks.items[0].href + "\nAlbum: " + data.tracks.items[0].album.name + "\n"
 
         fs.appendFile("log.txt", logIt, function (err) {
             if (err) {
@@ -93,5 +93,44 @@ function spotifyThis() {
             }
         })
     });
+}
+
+function movieThis(whatInfo) {
+    if (!whatInfo) {
+        whatInfo = "Mr. Nobody";
+    }
+    var queryURL = "http://www.omdbapi.com/?t=" + whatInfo + "&y=&plot=short&apikey=trilogy";
+
+    axios.request(queryURL).then(
+        function (response) {
+            //search result follows line
+            console.log("----------------------------");
+            // title response
+            console.log("Title : " + response.data.Title)
+            // release year response
+            console.log("Release Year : " + response.data.Year)
+            // imdb response
+            console.log("IMDB Rating : " + response.data.imdbRating)
+            // rotton tomato response
+            console.log("Rotten Tomato Rating : " + response.data.Ratings[1].Value)
+            // country response
+            console.log("Country: " + response.data.Country)
+            // language response
+            console.log("Language: " + response.data.Language)
+            // plot response
+            console.log("Plot: " + response.data.Plot)
+            // actors response
+            console.log("Actors: " + response.data.Actors)
+
+            var logIt = "\n-----Movie Log-----\nTitle : " + response.data.Title + "\nRelease Year : " + response.data.Year + "\nIMDB Rating : " + response.data.imdbRating + "\nRotten Tomato Rating : " + response.data.Ratings[1].Value + "\nCountry: " + response.data.Country + "\nLanguage: " + response.data.Language + "\nPlot: " + response.data.Plot + "\nActors: " + response.data.Actors + "\n"
+
+            fs.appendFile("log.txt", logIt, function (err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+
+        });
+
 }
 appStart(whichApi, whatInfo);

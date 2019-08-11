@@ -3,3 +3,31 @@ Artist Name: ed sheeran
 Name of Venue: Ile Obudai / Hongrie
 Venue Location: Budapest
 Date of event: 08-07-2019
+-----Movie Log-----
+Title : The Matrix
+Release Year : 1999
+IMDB Rating : 8.7
+Rotten Tomato Rating : 88%
+Country: USA
+Language: English
+Plot: A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.
+Actors: Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving
+-----Movie Log-----
+Title : The Matrix
+Release Year : 1999
+IMDB Rating : 8.7
+Rotten Tomato Rating : 88%
+Country: USA
+Language: English
+Plot: A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.
+Actors: Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving
+-----Concerts Log-----
+Artist Name: ed sheeran
+Name of Venue: Laugardalsvöllur
+Venue Location: Reykjavik
+Date of event: 08-11-2019
+-----Concerts Log-----
+Artist Name: post malone
+Name of Venue: SZIGET FESTIVAL
+Venue Location: Budapest
+Date of event: 08-11-2019
